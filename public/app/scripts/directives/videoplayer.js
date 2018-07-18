@@ -10,7 +10,7 @@ angular.module('publicApp')
   .directive('videoPlayer', function ($sce) {
     return {
       //template: '<div><video ng-src="{{trustSrc()}}" autoplay></video></div>',
-      template: '<div><video autoplay></video></div>',
+      template: '<div><video autoplay playsinline></video></div>',
       restrict: 'E',
       replace: true,
       scope: {
