@@ -13,11 +13,13 @@ angular.module('publicApp')
 
     var iceConfig = { 'iceServers': [
                                       { 'urls': 'stun:stun.l.google.com:19302' },
+                                      /*
                                       {
                                         'urls': 'turn:gds-webrtc.herokuapp.com:5555',
                                         username: 'username',
                                         credential: 'password'
                                       },
+                                      */
                                       {
                                           url: 'turn:turn.anyfirewall.com:443?transport=tcp',
                                           credential: 'webrtc',
