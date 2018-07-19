@@ -18,7 +18,10 @@ angular.module('publicApp')
         peer: '='
       },
       link: function (scope, element) {
-        $(element[0]).children('video')[0].srcObject = scope.peer.stream;
+        scope.$watch('peer.stream', function(){
+          $(element[0]).children('video')[0].srcObject = scope.peer.stream;
+        });
+        //$(element[0]).children('video')[0].srcObject = scope.peer.stream;
         /*
         scope.$watch('peer.stream', function(){
           //element[0].srcObject = scope.peer.stream;

@@ -56,11 +56,9 @@ angular.module('publicApp')
   })
   .directive('localVideo', function() {
   return {
-    link: function($scope, $element, $attrs, $controllers) {
-      $scope.$watch('stream', function(){
-        console.log('here3');
-        console.log($scope.stream);
-        $element[0].srcObject = $scope.stream;
+    link: function(scope, element, attrs, controllers) {
+      scope.$watch('stream', function(){
+        element[0].srcObject = scope.stream;
       });
       //console.log('here2');
       //$element[0].srcObject = $scope.getLocalVideo();
