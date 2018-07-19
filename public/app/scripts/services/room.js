@@ -109,6 +109,9 @@ angular.module('publicApp')
       socket.on('msg', function (data) {
         handleMessage(data);
       });
+      socket.on('disconnect', function () {
+        alert('server disconnected!');
+      });
     }
 
     var api = {
