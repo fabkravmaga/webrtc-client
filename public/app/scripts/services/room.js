@@ -15,8 +15,8 @@ angular.module('publicApp')
                                       //{ 'urls': 'stun:stun.l.google.com:19302' },
                                       {
                                         'urls': ['turns:gds-webrtc.herokuapp.com:5555']//,
-                                        //username: 'username',
-                                        //credential: 'password'
+                                        username: 'username',
+                                        credential: 'password'
                                       }
                                     ]},
         peerConnections = {},
