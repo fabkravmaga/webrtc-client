@@ -12,7 +12,7 @@ angular.module('publicApp')
   .factory('Room', function ($rootScope, $q, Io, config) {
 
     var iceConfig = { 'iceServers': [
-                                      { 'urls': 'stun:stun.l.google.com:19302' },
+                                      //{ 'urls': 'stun:stun.l.google.com:19302' },
                                       {
                                         'urls': ['turns:gds-webrtc.herokuapp.com:5555'],
                                         username: 'username',
