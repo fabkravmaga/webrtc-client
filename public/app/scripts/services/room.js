@@ -93,6 +93,7 @@ angular.module('publicApp')
 
     function addHandlers(socket) {
       socket.on('peer.connected', function (params) {
+        console.log('peer connected ', params.id);
         makeOffer(params.id);
       });
       socket.on('peer.disconnected', function (data) {
