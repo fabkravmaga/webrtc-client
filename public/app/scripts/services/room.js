@@ -18,6 +18,11 @@ angular.module('publicApp')
                                         username: 'username',
                                         credential: 'password'
                                       }
+                                      {
+                                          url: 'turn:turn.anyfirewall.com:443?transport=tcp',
+                                          credential: 'webrtc',
+                                          username: 'webrtc'
+                                      }
                                     ]},
         peerConnections = {},
         currentId, roomId,
