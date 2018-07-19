@@ -20,14 +20,13 @@ angular.module('publicApp')
                                         credential: 'password'
                                       },
                                       */
-                                      /*
                                       {
                                         "urls": [
                                           "stun:74.125.200.127:19302",
                                           "stun:[2404:6800:4003:C00::7F]:19302"
                                         ]
                                       },
-                                      */
+                                      /*
                                       {
                                         "urls": [
                                           "turn:74.125.200.127:19305?transport=udp",
@@ -37,7 +36,7 @@ angular.module('publicApp')
                                         ],
                                         "username": "CNn8xdoFEga49xNmcioYzc/s6OMTIICjBQ",
                                         "credential": "kyKCHI388tWGamrWNzHyC5Fzbt0="
-                                      }
+                                      }*/
                                     ]},
         peerConnections = {},
         currentId, roomId,
