@@ -21,9 +21,9 @@ angular.module('publicApp')
                                       },
                                       */
                                       {
-                                          url: 'turn:turn.anyfirewall.com:443?transport=tcp',
-                                          credential: 'webrtc',
-                                          username: 'webrtc'
+                                          url: "turn:74.125.200.127:19305?transport=udp",
+                                          credential: '0u/J3aB8NrI6ldJ7+d2xNy1jDw4=',
+                                          username: 'CNn7xdoFEgb6t574gyAYzc/s6OMTIICjBQ'
                                       }
                                     ]},
         peerConnections = {},
