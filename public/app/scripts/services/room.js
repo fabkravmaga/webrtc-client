@@ -97,6 +97,10 @@ angular.module('publicApp')
         makeOffer(params.id);
       });
       socket.on('peer.disconnected', function (data) {
+        if (peerConnections[data.id]) {
+          peerConnections[data.id].close();
+          delete peerConnections[data.id];
+        }
         api.trigger('peer.disconnected', [data]);
         if (!$rootScope.$$digest) {
           $rootScope.$apply();
