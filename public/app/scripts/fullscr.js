@@ -18,7 +18,7 @@ function setUpFullScreen() {
   }
 
   if (isChromeApp()) {
-    document.body.requestFullScreen = function() {
+    document.requestFullScreen = function() {
       chrome.app.window.current().fullscreen();
     };
   } else {
@@ -46,4 +46,5 @@ function fullScreenElement() {
       document.fullScreenElement;
 }
 
+setUpFullScreen();
 // End shims for fullscreen
