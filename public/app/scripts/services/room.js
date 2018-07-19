@@ -17,7 +17,7 @@ angular.module('publicApp')
                                         'urls': 'turn:gds-webrtc.herokuapp.com:5555',
                                         username: 'username',
                                         credential: 'password'
-                                      }
+                                      },
                                       {
                                           url: 'turn:turn.anyfirewall.com:443?transport=tcp',
                                           credential: 'webrtc',
