@@ -110,7 +110,7 @@ angular.module('publicApp')
         handleMessage(data);
       });
       socket.on('disconnect', function () {
-        alert('server disconnected!');
+        alert('server disconnected!'); 
       });
     }
 
