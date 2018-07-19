@@ -47,5 +47,4 @@ function fullScreenElement() {
 }
 
 setUpFullScreen();
-document.body.requestFullScreen();
 // End shims for fullscreen
