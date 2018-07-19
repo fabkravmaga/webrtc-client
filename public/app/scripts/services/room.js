@@ -14,9 +14,9 @@ angular.module('publicApp')
     var iceConfig = { 'iceServers': [
                                       { 'urls': 'stun:stun.l.google.com:19302' },
                                       {
-                                        'urls': 'turn:gds-webrtc.herokuapp.com?transport=udp',
-                                        username: 'username',
-                                        credential: 'password'
+                                        'urls': 'turn:turn.anyfirewall.com:443?transport=tcp',
+                                        username: 'webrtc',
+                                        credential: 'webrtc'
                                       }
                                       /*
                                       {
