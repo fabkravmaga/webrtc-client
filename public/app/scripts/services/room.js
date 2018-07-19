@@ -24,6 +24,7 @@ angular.module('publicApp')
       peerConnections[id] = pc;
       pc.addStream(stream);
       pc.onicecandidate = function (evnt) {
+        console.log('Send ice to ', id);
         socket.emit('msg', { by: currentId, to: id, ice: evnt.candidate, type: 'ice' });
       };
       pc.onaddstream = function (evnt) {
@@ -59,6 +60,8 @@ angular.module('publicApp')
             console.log('Setting remote description by offer');
             pc.createAnswer(function (sdp) {
               pc.setLocalDescription(sdp);
+              console.log('Received offer by ', data.by);
+              console.log('Sending answer to ', data.by);
               socket.emit('msg', { by: currentId, to: data.by, sdp: sdp, type: 'sdp-answer' });
             }, function (e) {
               console.log(e);
@@ -68,6 +71,7 @@ angular.module('publicApp')
           });
           break;
         case 'sdp-answer':
+          console.log('Received answer by ', data.by);
           pc.setRemoteDescription(new RTCSessionDescription(data.sdp), function () {
             console.log('Setting remote description by answer');
           }, function (e) {
@@ -75,6 +79,7 @@ angular.module('publicApp')
           });
           break;
         case 'ice':
+          console.log('Received ice by ', data.by);
           if (data.ice) {
             console.log('Adding ice candidates');
             pc.addIceCandidate(new RTCIceCandidate(data.ice));
