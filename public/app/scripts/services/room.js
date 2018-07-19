@@ -12,7 +12,7 @@ angular.module('publicApp')
   .factory('Room', function ($rootScope, $q, Io, config) {
 
     var iceConfig = { 'iceServers': [
-                                      { 'urls': 'stun:stun.l.google.com:19302' },
+                                      //{ 'urls': 'stun:stun.l.google.com:19302' },
                                       /*
                                       {
                                         'urls': 'turn:gds-webrtc.herokuapp.com:5555',
@@ -21,9 +21,20 @@ angular.module('publicApp')
                                       },
                                       */
                                       {
-                                          url: "turn:74.125.200.127:19305?transport=udp",
-                                          credential: '0u/J3aB8NrI6ldJ7+d2xNy1jDw4=',
-                                          username: 'CNn7xdoFEgb6t574gyAYzc/s6OMTIICjBQ'
+                                        "urls": [
+                                          "stun:74.125.200.127:19302",
+                                          "stun:[2404:6800:4003:C00::7F]:19302"
+                                        ]
+                                      },
+                                      {
+                                        "urls": [
+                                          "turn:74.125.200.127:19305?transport=udp",
+                                          "turn:[2404:6800:4003:C00::7F]:19305?transport=udp",
+                                          "turn:74.125.200.127:19305?transport=tcp",
+                                          "turn:[2404:6800:4003:C00::7F]:19305?transport=tcp"
+                                        ],
+                                        "username": "CNn8xdoFEga49xNmcioYzc/s6OMTIICjBQ",
+                                        "credential": "kyKCHI388tWGamrWNzHyC5Fzbt0="
                                       }
                                     ]},
         peerConnections = {},
