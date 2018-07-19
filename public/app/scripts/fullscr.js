@@ -18,7 +18,7 @@ function setUpFullScreen() {
   }
 
   if (isChromeApp()) {
-    document.requestFullScreen = function() {
+    document.body.requestFullScreen = function() {
       chrome.app.window.current().fullscreen();
     };
   } else {
