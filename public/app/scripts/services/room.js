@@ -11,7 +11,14 @@
 angular.module('publicApp')
   .factory('Room', function ($rootScope, $q, Io, config) {
 
-    var iceConfig = { 'iceServers': [{ 'urls': 'stun:stun.l.google.com:19302' }]},
+    var iceConfig = { 'iceServers': [
+                                      { 'urls': 'stun:stun.l.google.com:19302' },
+                                      {
+                                        'urls': ['turns:gds-webrtc.herokuapp.com:5555'],
+                                        username: 'username',
+                                        credential: 'password'
+                                      }
+                                    ]},
         peerConnections = {},
         currentId, roomId,
         stream;
@@ -110,7 +117,7 @@ angular.module('publicApp')
         handleMessage(data);
       });
       socket.on('disconnect', function () {
-        alert('server disconnected!'); 
+        alert('server disconnected!');
       });
     }
 

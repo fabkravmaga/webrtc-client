@@ -16,6 +16,7 @@
     "force": "0.0.3",
     "grunt": "^1.0.3",
     "grunt-cli": "^1.2.0",
+    "node-turn": "0.0.1",
     "node-uuid": "^1.4.8",
     "socket.io": "^2.1.1"
   }
