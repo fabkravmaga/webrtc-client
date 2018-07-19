@@ -12,8 +12,10 @@ var turnServer = new turn({
   // set options
   listeningPort: 5555,
   authMech: 'long-term',
+  /*
   credentials: {
     username: "password"
   }
+  */
 });
 turnServer.start();
