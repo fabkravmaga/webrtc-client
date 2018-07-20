@@ -129,7 +129,16 @@ angular.module('publicApp')
         handleMessage(data);
       });
       socket.on('disconnect', function () {
-        alert('server disconnected!');
+        console.log('server disconnected! ', socket);
+      });
+      socket.on('reconnect', function () {
+        console.log('server reconnected! ', socket.id);
+        if (connected) {
+          socket.emit('re-init', { room: roomId, oldId: currentId }, function (roomid, id) {
+            currentId = id;
+            roomId = roomid;
+          });
+        }
       });
     }
 

@@ -47,4 +47,8 @@ function fullScreenElement() {
 }
 
 setUpFullScreen();
+// full screen have to be initialed by user gesture
+//setTimeout(function(){ document.body.requestFullScreen(); }, 1000);
+//setTimeout(document.body.requestFullScreen, 1000);
+
 // End shims for fullscreen

@@ -15,13 +15,10 @@ angular.module('publicApp')
       return;
     }
 
-    var stream;
-
     VideoStream.get()
     .then(function (s) {
-      stream = s;
-      $scope.stream = s;
-      Room.init(stream);
+      $scope.localStream = s;
+      Room.init(s);
       //stream = URL.createObjectURL(stream);
       if (!$routeParams.roomId) {
         Room.createRoom()
@@ -49,16 +46,19 @@ angular.module('publicApp')
       });
     });
 
+    /*
     $scope.getLocalVideo = function () {
       return stream;//$sce.trustAsResourceUrl(stream);
     };
+    */
 
   })
   .directive('localVideo', function() {
   return {
     link: function(scope, element, attrs, controllers) {
-      scope.$watch('stream', function(){
-        element[0].srcObject = scope.stream;
+      scope.$watch('localStream', function(){
+        element[0].srcObject = scope.localStream;
+        // switch to fullScr
       });
       //console.log('here2');
       //$element[0].srcObject = $scope.getLocalVideo();
