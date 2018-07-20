@@ -12,6 +12,7 @@
   "author": "mgechev",
   "license": "MIT",
   "dependencies": {
+    "dgram": "^1.0.1",
     "express": "^4.16.3",
     "force": "0.0.3",
     "grunt": "^1.0.3",

@@ -11,7 +11,7 @@ server.run(config);
 /*
 var turnServer = new turn({
   // set options
-  //listeningPort: 80,
+  listeningPort: 63,
   authMech: 'long-term',
   credentials: {
     username: "password"

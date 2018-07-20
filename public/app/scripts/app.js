@@ -30,8 +30,8 @@ angular
 
 angular.module('publicApp')
   .constant('config', {
-      SIGNALIG_SERVER_URL: 'gds-webrtc.herokuapp.com'
-      //SIGNALIG_SERVER_URL: 'localhost:5555'
+      //SIGNALIG_SERVER_URL: 'gds-webrtc.herokuapp.com'
+      SIGNALIG_SERVER_URL: 'localhost:5555'
   });
 
 Object.setPrototypeOf = Object.setPrototypeOf || function(obj, proto) {
