@@ -1,0 +1,114 @@
+<!--
+ * Kiosk v5.14.0
+ * Copyright (C) 2017 M. P. Cook Limited Liability Co.  <support@cook.company>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Kiosk: Content</title>
+    <link rel="shortcut icon" href="../www/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../www/favicon.ico" type="image/x-icon">
+    <link type="text/css" rel="stylesheet" href="../www/css/material-icons/material-icons.css" media="screen,projection">
+    <link type="text/css" rel="stylesheet" href="../www/css/materialize.min.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="../www/css/shared.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="../css/browser.css"  media="screen,projection"/>
+    <script language="javascript" type="text/javascript" src="../www/js/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript" src="../www/js/moment.js"></script>
+    <script language="javascript" type="text/javascript" src="../www/js/materialize.min.js"></script>
+    <script language="javascript" type="text/javascript" src="../js/browser.js"></script>
+  </head>
+  <body>
+    <div id="login" class="modal">
+      <div class="modal-content">
+        <div class="action-bar">
+          <div class="row">&nbsp;</div>
+          <div class="row">
+            <div class="input-field col offset-s2  s8">
+              <input id="username" type="text" class="validate">
+              <label for="username">Username</label>
+            </div>
+
+            <div class="input-field offset-s2  col s8">
+              <input id="password" type="password" class="validate">
+              <label for="password">Password</label>
+            </div>
+
+            <div class="input-field col offset-s2  s8">
+              <a href="#" id="submit" class="btn-large waves-effect" style="float:right">Go</a>
+            </div>
+          </div>
+          <div class="row">&nbsp;</div>
+        </div>
+      </div>
+    </div>
+    <div id="mediaPermission" class="modal">
+      <div class="modal-content">
+        <h4>Permission Request</h4>
+        <p>This application needs video and/or audio device access. Please grant access in the following dialogue.</p>
+        <div class="modal-footer">
+          <a href="#!" class="cancel modal-action modal-close waves-effect waves-red btn-flat ">Cancel</a>
+          <a href="#!" class="ok modal-action modal-close waves-effect waves-green btn-flat ">OK</a>
+        </div>
+      </div>
+    </div>
+    <div id="dialogAlert" class="modal">
+      <div class="modal-content">
+        <h5 class="text"></h5>
+        <div class="modal-footer">
+          <a href="#!" class="ok modal-action modal-close waves-effect waves-green btn-flat ">OK</a>
+        </div>
+      </div>
+    </div>
+    <div id="dialogConfirm" class="modal">
+      <div class="modal-content">
+        <h5 class="text"></h5>
+        <div class="modal-footer">
+          <a href="#!" class="cancel modal-action modal-close waves-effect waves-red btn-flat ">Cancel</a>
+          <a href="#!" class="ok modal-action modal-close waves-effect waves-green btn-flat ">OK</a>
+        </div>
+      </div>
+    </div>
+    <div id="dialogPrompt" class="modal">
+      <div class="modal-content">
+        <div class="row">
+         <div class="input-field col s12">
+           <input id="promptValue" type="text" placeholder="">
+           <label for="promptValue" class="text"></label>
+         </div>
+       </div>
+        <div class="modal-footer">
+          <a href="#!" class="cancel modal-action modal-close waves-effect waves-red btn-flat ">Cancel</a>
+          <a href="#!" class="ok modal-action modal-close waves-effect waves-green btn-flat ">OK</a>
+        </div>
+      </div>
+    </div>
+    <div id="newWindow" class="modal"></div>
+    <div id="container">
+      <div id="tabs" class="row">
+        <nav id="nav">
+            <ul>
+              <li class="home inactive"><a href="#"><i class="material-icons">home</i></a></li>
+              <li class="back inactive"><a href="#"><i class="material-icons">arrow_back</i></a></li>
+              <li class="refresh"><a href="#"><i class="material-icons">refresh</i></a></li>
+            </ul>
+        </nav>
+        <ul class="tabs"></ul>
+      </div>
+      <div id="screensaver"></div>
+      <div id="content"></div>
+    </div>
+  </body>
+</html>
