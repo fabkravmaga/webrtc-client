@@ -1,0 +1,23 @@
+{
+  "name": "gds-webrtc",
+  "description": "GovTech GDS webrtc project",
+  "main": "index.js",
+  "authors": [
+    "Lim Chee Gan"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.7.2",
+    "jquery": "^3.3.1",
+    "angular-sanitize": "^1.7.2"
+  }
+}

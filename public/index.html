@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <title>GovTech Meeting Rooms</title>
+    <link rel="icon" href="favicon.ico">
+
+    <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/bower_components/angular/angular.js"></script>
+    <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script src="/scripts/fullscr.js"></script>
+    <script src="/scripts/adapter.js"></script>
+    <script src="/scripts/app.js"></script>
+    <script src="scripts/controllers/loginctrl.js"></script>
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/fatalErr.css">
+    <link rel="stylesheet" href="css/login.css">
+  </head>
+  <body ng-app="webrtcApp">
+    <div class="peerVideos">
+      <peer-video ng-repeat="peer in peers" peer="peer"></peer-video>
+    </div>
+
+    <div class="webcam" ng-class="{mini: peers.length > 0}">
+      <video id="localStream" autoplay playsinline muted></video>
+    </div>
+    <div class="waitPeers" ng-class="{waiting: loggedIn && peers.length < 1}"><span class="aniEllipsis">Waiting for peers</span></div>
+
+    <div class="login" ng-class="{loginNeeded: loginNeeded}" ng-controller="LoginCtrl">
+      <div class="loginContent">
+        <img class="logo" src="/img/govtech_logo.png"/>
+        <div ng-show="loginErr" ng-bind-html="loginErr" class="loginErr"></div>
+        <form action="" onSubmit="return false;" ng-submit="submit()">
+          <div class="entries">
+            <span>User: </span><input type="text" ng-model="userId" name="userId" placeholder="required"/>
+            <br>
+            <span>Password: </span><input type="password" ng-model="userPass" name="userPass" placeholder="required"/>
+          </div>
+          <input type="submit" id="submit" value="Log In" />
+        </form>
+      </div>
+    </div>
+
+    <div ng-show="fatalErr" class="fatalErr">
+      <img class="logo" src="/img/govtech_logo.png"/>
+      <div ng-bind="fatalErr"></div>
+      <a class="refresh" href="" onclick="location.reload()">Click here to refresh <img src="/img/refresh.png"/></a>
+    </div>
+  </body>
+</html>

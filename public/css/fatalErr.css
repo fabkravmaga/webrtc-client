@@ -1,0 +1,26 @@
+.fatalErr {
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:black;
+  z-index:9999;
+  left:0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction:column;
+  color:white;
+}
+.fatalErr .logo{
+    width:20%;
+    margin-bottom: 30px;
+}
+.fatalErr .refresh {
+    margin:20px 0;
+    color: white;
+    text-decoration: none;
+}
+.fatalErr .refresh img{
+    vertical-align: middle;
+    height:18px;
+}

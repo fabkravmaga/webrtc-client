@@ -1,0 +1,83 @@
+/* login form */
+.login {
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:transparent;
+  z-index:100;
+  left:-100%;
+  transition: all 2s ease;
+}
+.login.loginNeeded {
+  left:0;
+}
+.loginContent {
+  background-color:rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  min-width: 300px;
+  width: 30%;
+  min-height: 450px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction:column;
+  padding:10px;
+}
+.login .logo {
+  display: block;
+  width:250px;
+  margin-bottom:50px;
+}
+.loginErr {
+  color:red;
+  padding:10px;
+}
+.login form {
+  text-align:center;
+  margin-bottom:50px;
+  color:white;
+  position:relative;
+}
+.login form.disabled {
+  opacity:0.5;
+}
+.login form.disabled:after {
+  position:absolute;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+  content:' ';
+}
+.login form .entries {
+  padding:10px;
+  white-space: nowrap;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  text-align: left;
+}
+.login form .entries span {
+  display:inline-block;
+  white-space:nowrap;
+  text-align: left;
+  padding:5px 10px 5px 0;
+  width:80px;
+}
+.login form div input[type=text],
+.login form div input[type=password] {
+  display:inline-block;
+  border:none;
+  margin: 5px 0;
+  padding: 5px;
+  width:150px;
+}
+.login form input#submit {
+  display:inline-blockblock;
+  width: 100px;
+  border:1px solid lightgrey;
+  border-radius:5px;
+  padding:5px 15px;
+  margin: 10px 0;
+}
