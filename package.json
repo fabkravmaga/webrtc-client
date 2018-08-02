@@ -4,6 +4,8 @@
   "description": "GovTech GDS webrtc project",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon --watch ./ index.js",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Lim Chee Gan",
@@ -12,6 +14,7 @@
     "express": "^4.16.3",
     "fs": "0.0.1-security",
     "https": "^1.0.0",
+    "nodemon": "^1.18.3",
     "socket.io": "^2.1.1"
   }
 }
