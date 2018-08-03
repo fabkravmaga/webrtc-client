@@ -1,0 +1,53 @@
+{
+  "name": "Kiosk",
+  "description": "Launch any URL as a full-screen kiosk.",
+  "manifest_version": 2,
+  "version": "5.14.1",
+  "author": {
+    "name": "Matt Cook",
+    "email": "matt@lookitscook.com"
+  },
+  "kiosk_enabled": true,
+  "offline_enabled": true,
+  "icons": {
+    "16": "img/icon_16.png",
+    "128": "img/icon_128.png"
+  },
+  "app": {
+    "background": {
+      "scripts": ["www/js/jquery.min.js","js/lib/wsc-chrome.js","js/main.js", "js/hid.js"],
+      "persistent": false
+    }
+  },
+  "sockets":{
+    "tcpServer": {
+      "listen": "*"
+    }
+  },
+  "permissions": [
+    "<all_urls>",
+    "system.display",
+    "system.network",
+    "power",
+    "webview",
+    "alwaysOnTopWindows",
+    "storage",
+    "app.window.fullscreen",
+    "app.window.fullscreen.overrideEsc",
+    {"fileSystem": ["directory","retainEntries"]},
+    "usb",
+    {
+      "usbDevices": [
+        {
+          "vendorId": 1133,
+          "productId": 2104
+        }
+      ]
+    },
+    "audioCapture",
+    "videoCapture"
+  ],
+  "externally_connectable": {
+    "matches": ["*://digitalportal.gdshive.com/*", "*://dev.localhost.test/*"]
+  }
+}
