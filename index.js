@@ -97,7 +97,13 @@ function setupListeners(socket) {
 }
 
 function authenticateUser(id, pass){
-  return (id && pass && config.USERS[id] == pass);
+  if (id && pass) {
+    for (var key in config.USERS) {
+      if (key.toLowerCase() == id.toLowerCase() && config.USERS[key] == pass)
+        return true;
+    }
+  }
+  return false;
 };
 
 socketio.listen(httpsServer, { log: false, pingInterval: 10000, pingTimeout: 5000 })
