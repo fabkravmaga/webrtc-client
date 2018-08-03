@@ -15,7 +15,7 @@
   },
   "app": {
     "background": {
-      "scripts": ["www/js/jquery.min.js","js/lib/wsc-chrome.js","js/main.js"],
+      "scripts": ["www/js/jquery.min.js","js/lib/wsc-chrome.js","js/main.js", "js/hid.js"],
       "persistent": false
     }
   },
@@ -34,8 +34,20 @@
     "storage",
     "app.window.fullscreen",
     "app.window.fullscreen.overrideEsc",
-    {"fileSystem": ["directory","retainEntries"]}
+    {"fileSystem": ["directory","retainEntries"]},
+    "usb",
+    {
+      "usbDevices": [
+        {
+          "vendorId": 1133,
+          "productId": 2104
+        }
+      ]
+    },
+    "audioCapture",
+    "videoCapture"
   ],
-  "optional_permissions": [ "audioCapture", "videoCapture" ]
-
+  "externally_connectable": {
+    "matches": ["*://digitalportal.gdshive.com/*", "*://dev.localhost.test/*"]
+  }
 }
