@@ -8,7 +8,7 @@ Object.setPrototypeOf = Object.setPrototypeOf || function(obj, proto) {
 */
 
 
-angular.module('webrtcApp', ['ngSanitize']).run(function($rootScope, $timeout, config){
+angular.module('webrtcApp', ['ngSanitize']).run(function($rootScope, $timeout){//}, config){
   $rootScope.loginNeeded = false;
   $rootScope.fatalErr = '';
   $rootScope.peers = [];
@@ -230,26 +230,23 @@ angular.module('webrtcApp', ['ngSanitize']).run(function($rootScope, $timeout, c
   };
 });
 
+/*
 angular.module('webrtcApp').constant('config', {
-  //SIGNALIG_SERVER_URL: 'gds-webrtc.herokuapp.com'
   SIGNALIG_SERVER_URL: 'localhost:5555'
 });
-
+*/
 
 angular.module('webrtcApp')
   .directive('peerVideo', function () {
     return {
-      template: '<video autoplay playsinline></video>',
+      template: '<div class="peerVideo"><video autoplay playsinline></video></div>',
       restrict: 'E',
       replace: true,
-      /*
-      scope: {
-        peer: '='
-      },
-      */
       link: function (scope, element, attrs) {
         console.log('Setting peer Stream: ', scope.peer);
-        element[0].srcObject = scope.peer.stream;
+        $(element[0]).find('video').each((idx, video) => {
+          video.srcObject = scope.peer.stream;
+        });
       }
     };
   });

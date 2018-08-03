@@ -124,7 +124,7 @@ socketio.listen(httpsServer, { log: false, pingInterval: 10000, pingTimeout: 500
 
 var redirectApp = express();
 redirectApp.use (function (req, res, next) {
-  var host = req.headers.host.replace(/(:\d+)$/, '');
+  var host = req.headers.host ? req.headers.host.replace(/(:\d+)$/, ''):req.headers.host;
   var httpsPort = ':' + httpsServer.address().port;
   httpsPort = httpsPort.replace(':443', '');
   res.redirect('https://' + host + httpsPort + req.url);
