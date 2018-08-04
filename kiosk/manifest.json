@@ -3,6 +3,7 @@
   "description": "Launch any URL as a full-screen kiosk.",
   "manifest_version": 2,
   "version": "5.14.1",
+  "key": "secretKeyKey",
   "author": {
     "name": "Matt Cook",
     "email": "matt@lookitscook.com"
@@ -33,8 +34,8 @@
     "alwaysOnTopWindows",
     "storage",
     "app.window.fullscreen",
+    "hid",
     "app.window.fullscreen.overrideEsc",
-    {"fileSystem": ["directory","retainEntries"]},
     "usb",
     {
       "usbDevices": [
@@ -45,7 +46,8 @@
       ]
     },
     "audioCapture",
-    "videoCapture"
+    "videoCapture",
+    {"fileSystem": ["directory","retainEntries"]}
   ],
   "externally_connectable": {
     "matches": ["*://digitalportal.gdshive.com/*", "*://dev.localhost.test/*"]

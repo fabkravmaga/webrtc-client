@@ -5,6 +5,7 @@ chrome.app.runtime.onLaunched.addListener(function() {
 var connectionHandle = 0;
 var externalMessagingPort;
 
+console.log("loaded hid.js")
 
 chrome.runtime.onConnectExternal.addListener(function (port) {
   initializeHID()
@@ -15,7 +16,11 @@ chrome.runtime.onConnectExternal.addListener(function (port) {
 
 function initializeHID() {
   chrome.hid.getDevices({vendorId: 1133, productId: 2104}, (devices) => {
-    checkIfBCC950(devices[0])
+    for (device of devices) {
+      if (device.maxInputReportSize === 1) {
+        checkIfBCC950(device)
+      }
+    }
   })
 }
 
@@ -36,8 +41,8 @@ function receiveNext(reportId, data) {
   console.log("reportId", reportId)
   console.log("data", data)
   console.log(dataView.getInt8())
-  if (controlCode === 2) { console.log("call"); sendEvent(externalMessagingPort, "digitalportal.call") }
-  if (controlCode === 0) { console.log("hangup"); sendEvent(externalMessagingPort, "digitalportal.hangup") }
+  if (controlCode === 2) { console.log("Extension event: call"); sendEvent(externalMessagingPort, "digitalportal.call") }
+  if (controlCode === 0) { console.log("Extension event: hangup"); sendEvent(externalMessagingPort, "digitalportal.hangup") }
   chrome.hid.receive(connectionHandle, receiveNext)
 }
 function checkIfBCC950(deviceAddedEvent) {

@@ -7,12 +7,44 @@ Object.setPrototypeOf = Object.setPrototypeOf || function(obj, proto) {
 };
 */
 
+const CHROME_APP_ID = 'kdkgkiakpijcmglnjoghnajiokcjgabg';
+
+function eventTrigger(eventName) {
+  window.dispatchEvent(new Event(eventName))
+}
+
+// sample event listeners
+// Simulate button presses by using window.dispatchEvent(new Event('digitalportal.call')) or 'digitalportal.hangup'
+
+window.addEventListener("digitalportal.call", () => {
+  window.location.reload()
+  console.log("start call please")
+})
+
+window.addEventListener("digitalportal.hangup", () => {
+  console.log("hangup please")
+})
 
 angular.module('webrtcApp', ['ngSanitize']).run(function($rootScope, $timeout){//}, config){
   $rootScope.loginNeeded = false;
   $rootScope.fatalErr = '';
   $rootScope.peers = [];
-  $rootScope.loggedIn = false,
+  $rootScope.loggedIn = false;
+
+
+  // attempt to connect to chrome app for listening for buttons
+
+  if (typeof chrome !== 'undefined') {
+    var messagingPort = chrome.runtime.connect(CHROME_APP_ID)
+    console.log("messaging port established", messagingPort)
+    if (messagingPort) {
+      messagingPort.onMessage.addListener((msg) => {
+        eventTrigger(msg.message)
+      })
+    }
+  }
+  
+
 
   // get webcam first then continue
   // no webcam then no point
