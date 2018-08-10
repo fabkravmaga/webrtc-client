@@ -42,51 +42,56 @@ console.log('Listening on', 443);
 
 
 var socketio = require('socket.io'),
+    commonRoom = [],
     users = {};
 
-function userLoggedIn(user, socket) {
-  if (users[user]) {// kick out old user
-    users[user].emit('kickedout');
-    users[user].disconnect(true);
+function userLoggedIn(userId, socket) {
+  if (users[userId]) {// kick out old user
+    users[userId].socket.emit('kickedout');
+    users[userId].socket.disconnect(true);
 
     // notify
-    delete users[user];
+    delete users[userId];
+    if (commonRoom.indexOf(userId) >= 0) {
+      commonRoom.splice(commonRoom.indexOf(userId), 1);
+      commonRoom.forEach(id => {
+        users[id].socket.emit('peer.left', { id:userId });
+      });
+    }
     for (var key in users) {
-      users[key].emit('peer.disconnected', { id: user });
+      users[key].socket.emit('peer.disconnected', { id: userId });
     }
   }
 
   // register user and notify
   setupListeners(socket);
   for (var key in users) {
-    //if (key != user)
-      users[key].emit('peer.connected', { id: user });
+    users[key].socket.emit('peer.connected', { id:userId, inCall:false });
   }
-  users[user] = socket;
-  console.log('user loggedin', user);
+  users[userId] = {socket:socket, inCall:false};
+  console.log('user loggedin', userId);
 };
 
 function setupListeners(socket) {
   // setup listeners for login user
   socket.on('disconnect', function () {
-    var disconnectedUser;
-    for (var key in users) {
-      if (users[key] === socket)
-        disconnectedUser = key;
-    }
+    var disconnectedUser = getUserId(socket);
     if (disconnectedUser) {
       delete users[disconnectedUser];
+      if (commonRoom.indexOf(disconnectedUser) >= 0) {
+        commonRoom.splice(commonRoom.indexOf(disconnectedUser), 1);
+        commonRoom.forEach(id => {
+          users[id].socket.emit('peer.left', { id:disconnectedUser });
+        });
+      }
       for (var key in users) {
-        users[key].emit('peer.disconnected', { id: disconnectedUser });
+        users[key].socket.emit('peer.disconnected', { id: disconnectedUser });
       }
       console.log('client disconnected:', socket.id);
     }
   });
-  socket.on('reconnect', function () {
-    console.log('reconnect ', socket.id);
-  });
   socket.on('msg', function (data) {
-    var toSocket = users[data.to];
+    var toSocket = users[data.to].socket;
     if (toSocket) {
       console.log('Redirecting message to', data.to, 'by', data.by, ' -- data type: ', data.type);
       toSocket.emit('msg', data);
@@ -94,6 +99,44 @@ function setupListeners(socket) {
       console.warn('Invalid user');
     }
   });
+  socket.on('joinCommonRoom', () => {
+    var userId = getUserId(socket);
+    if (userId && commonRoom.indexOf(userId) < 0) {
+      console.log('Joined CommonRoom', userId);
+      commonRoom.forEach(id => {
+        users[id].socket.emit('peer.joined', { id:userId });
+      });
+      commonRoom.push(userId);
+    }
+  });
+  socket.on('leaveCommonRoom', () => {
+    var userId = getUserId(socket);
+    if (userId && commonRoom.indexOf(userId) >= 0) {
+      console.log('Left CommonRoom', userId);
+      commonRoom.splice(commonRoom.indexOf(userId), 1);
+      commonRoom.forEach(id => {
+        users[id].socket.emit('peer.left', { id:userId });
+      });
+    }
+  });
+  /*
+  socket.on('updateCallStatus', function (data) {
+    var userId = getUserId(socket);
+    if (userId) {
+      users[userId].inCall = data.inCall ? true:false;
+      for (var key in users) {
+        if (key != userId)
+          users[key].socket.emit('peer.updateCallStatus', { id:userId, inCall:users[userId].inCall });
+      }
+    }
+  });
+  socket.on('getOnlineUsers', function (fn) {
+    var userId = getUserId(socket);
+    var onlineUsers = getUsers();
+    onlineUsers = onlineUsers.filter(user => user.id != userId);
+    fn(onlineUsers);
+  });
+  */
 }
 
 function authenticateUser(id, pass){
@@ -105,6 +148,22 @@ function authenticateUser(id, pass){
   }
   return false;
 };
+
+function getUsers() {
+  var onlineUsers = [];
+  for (var key in users) {
+    onlineUsers.push({id:key, inCall:users[key].inCall});
+  }
+  return onlineUsers;
+}
+
+function getUserId(socket) {
+  for (var key in users) {
+    if (users[key].socket === socket)
+      return key;
+  }
+  return null;
+}
 
 socketio.listen(httpsServer, { log: false, pingInterval: 10000, pingTimeout: 5000 })
   .on('connection', function(socket){

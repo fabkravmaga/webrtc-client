@@ -30,7 +30,23 @@ body {
   to { width: 1.33em; margin-left:5px; margin-right: 0;}
 }
 
-
+.aniPulse{
+  animation: pulse linear 1.5s infinite;
+}
+@keyframes pulse {
+  0% {
+  	opacity:0.9;
+    box-shadow: 0 0 0 0 rgba(255,255,255, 0.4);
+  }
+  70% {
+  	opacity:1;
+  	box-shadow: 0 0 0 25px rgba(255,255,255, 0);
+  }
+  100% {
+  	opacity:0.9;
+  	box-shadow: 0 0 0 0 rgba(255,255,255, 0);
+  }
+}
 
 
 .peerVideos {
@@ -48,29 +64,98 @@ body {
   width:100%;
   height:100%;
 }
+
+
+
 .webcam {
-  width:100%;
-  height:100%;
+  display:block;
+  width:0;
+  height:0;
+  font-size:0;
+  /*transition:all 2s ease;*/
+  /* centering both vertical and horizontal*/
   position:absolute;
-  z-index:0;
+  top:0;
   bottom:0;
+  left:0;
   right:0;
-  transition: all 2s ease;
+  margin:auto;
 }
 .webcam.mini {
-  width:20%;
-  height:auto;
-  border:1px solid grey;
-}
-.webcam video{
-  /* video will not scale/stretch like image */
-  width:100%;
-  height:100%;
-  transform: scale(-1, 1);
+  top:100vh;
+  left:100vw;
 }
 
+.webcam .webcamWrapper{
+  display:inline-block;
+  font-size:0;
+  transform:translate(-50%, -50%);
+  /*transition:all 2s ease;*/
+  position:relative;
+}
+.webcam.mini .webcamWrapper{
+  transform:translate(-100%, -100%);
+  margin:-10px;
+}
+
+.webcamWrapper #pause{
+  display:none;
+  height:50%;
+  border-radius:9999px;
+  animation: pulse linear 1.5s infinite;
+  /* centering both vertical and horizontal*/
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  margin:auto;
+}
+
+.webcam video{
+  width:100vw;
+  max-width:100vw;
+  max-height:100vh;
+  border:0px solid grey;
+  transform:scale(-1, 1);
+  /*transition:all 2s ease;*/
+}
+.webcam.mini video{
+  max-width:20vw;
+  border-width:2px;
+}
+
+
+
+.webcam.paused #pause{
+  display:inline-block;
+}
+.webcam.paused video{
+  opacity:0;
+  border-width:0;
+}
+.webcam.paused .webcamWrapper{
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background:rgba(255,255,255,0.1);
+}
+.webcam.paused.mini {
+  top:0;
+  left:0;
+}
+.webcam.paused.mini .webcamWrapper{
+  transform:translate(-50%, -50%);
+  margin:0;
+}
+.webcam.paused.mini video{
+  max-width:100vw;
+}
+
+
+
+
+
 .waitPeers{
-  display: none;
   position: absolute;
   top: 10px;
   background: rgba(255,255,255,0.5);
@@ -79,4 +164,55 @@ body {
 }
 .waitPeers.waiting{
   display: inline-block;
+}
+
+
+
+.waitConnect {
+  position: absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+.waitConnect #call {
+  height:30vh;
+  border-radius:9999px;
+  background:green;
+  padding:40px;
+  animation: pulse linear 1.5s infinite;
+  cursor:pointer;
+}
+.waitConnect div {
+  background: rgba(255,255,255,0.5);
+  padding: 10px 30px;
+  margin-top:20px;
+  border-radius: 999px;
+  box-shadow: 2px 2px 24px #444;
+  font-size:1.5em;
+}
+
+
+
+.waitHangup {
+  position: absolute;
+  bottom: 10px;
+  background: rgba(255,255,255,0.5);
+  padding: 10px 30px;
+  border-radius: 999px;
+  box-shadow: 2px 2px 24px #444;
+  white-space:nowrap;
+  font-size:1.5em;
+}
+.waitHangup img{
+  height:3em;
+  border-radius:9999px;
+  background:red;
+  padding:0.5em;
+  vertical-align:middle;
 }
