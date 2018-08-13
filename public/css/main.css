@@ -15,7 +15,6 @@ html, body {
 body {
   display:flex;
   justify-content:center;
-  overflow:auto;
 }
 
 .aniEllipsis:after {
@@ -68,37 +67,34 @@ body {
 
 
 .webcam {
-  display:block;
-  width:0;
-  height:0;
-  font-size:0;
-  /*transition:all 2s ease;*/
-  /* centering both vertical and horizontal*/
-  position:absolute;
-  top:0;
-  bottom:0;
-  left:0;
-  right:0;
-  margin:auto;
-}
-.webcam.mini {
-  top:100vh;
-  left:100vw;
-}
-
-.webcam .webcamWrapper{
   display:inline-block;
   font-size:0;
-  transform:translate(-50%, -50%);
-  /*transition:all 2s ease;*/
-  position:relative;
+  position:absolute;
+  right:50%;
+  bottom:50%;
+  transform:translate(50%, 50%);
 }
-.webcam.mini .webcamWrapper{
-  transform:translate(-100%, -100%);
-  margin:-10px;
+.webcam.mini:not(.paused) {
+  right:10px;
+  bottom:10px;
+  transform:translate(0, 0);
 }
 
-.webcamWrapper #pause{
+.webcam video{
+  width:100vw;
+  max-width:100vw;
+  max-height:100vh;
+  border:0px solid grey;
+  transform:scale(-1, 1);
+}
+.webcam.mini:not(.paused) video{
+  max-width:20vw;
+  border-width:2px;
+}
+
+
+
+#pause{
   display:none;
   height:50%;
   border-radius:9999px;
@@ -111,44 +107,11 @@ body {
   right:0;
   margin:auto;
 }
-
-.webcam video{
-  width:100vw;
-  max-width:100vw;
-  max-height:100vh;
-  border:0px solid grey;
-  transform:scale(-1, 1);
-  /*transition:all 2s ease;*/
-}
-.webcam.mini video{
-  max-width:20vw;
-  border-width:2px;
-}
-
-
-
-.webcam.paused #pause{
+.paused #pause{
   display:inline-block;
 }
-.webcam.paused video{
+.paused video{
   opacity:0;
-  border-width:0;
-}
-.webcam.paused .webcamWrapper{
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  background:rgba(255,255,255,0.1);
-}
-.webcam.paused.mini {
-  top:0;
-  left:0;
-}
-.webcam.paused.mini .webcamWrapper{
-  transform:translate(-50%, -50%);
-  margin:0;
-}
-.webcam.paused.mini video{
-  max-width:100vw;
 }
 
 
@@ -179,6 +142,8 @@ body {
   align-items:center;
   justify-content:center;
   overflow:hidden;
+    display:none;
+
 }
 .waitConnect #call {
   height:30vh;

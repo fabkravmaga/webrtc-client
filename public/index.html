@@ -27,10 +27,8 @@
     </div>
 
     <div class="webcam" ng-class="{mini: peers.length > 0}">
-      <span class="webcamWrapper">
-        <video id="localStream" autoplay playsinline muted></video>
-        <img id="pause" src="/img/pause.svg">
-      </span>
+      <video id="localStream" autoplay playsinline muted></video>
+      <img id="pause" src="/img/pause.svg">
     </div>
 
     <div class="waitPeers" ng-if="loggedIn && inCall && peers.length < 1"><span class="aniEllipsis">Waiting for peers</span></div>

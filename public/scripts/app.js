@@ -37,6 +37,8 @@ window.addEventListener("keypress", (event) => {
                 localStorage.removeItem('webrtcApp_UserPass');
                 location.reload();
                 break;
+      //case 'p': $('.webcam').toggleClass('mini');
+      //          break;
     }
   }
 });
