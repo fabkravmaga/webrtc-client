@@ -142,8 +142,6 @@ body {
   align-items:center;
   justify-content:center;
   overflow:hidden;
-    display:none;
-
 }
 .waitConnect #call {
   height:30vh;
