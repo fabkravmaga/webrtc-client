@@ -147,7 +147,7 @@ body {
   height:30vh;
   border-radius:9999px;
   background:green;
-  padding:40px;
+  padding:6vh;
   animation: pulse linear 1.5s infinite;
   cursor:pointer;
 }
