@@ -317,62 +317,8 @@ angular.module('webrtcApp', ['ngSanitize']).run(function($rootScope, $timeout){/
     }
   };
 
-  function findLine(sdpLines, prefix, substr) {
-    return findLineInRange(sdpLines, 0, -1, prefix, substr);
-  };
 
-  function findLineInRange(sdpLines, startLine, endLine, prefix, substr, direction) {
-    if (direction === undefined) {
-      direction = "asc";
-    }
-    direction = direction || "asc";
-    if (direction === "asc") {
-      var realEndLine = endLine !== -1 ? endLine : sdpLines.length;
-      for (var i = startLine; i < realEndLine; ++i) {
-        if (sdpLines[i].indexOf(prefix) === 0) {
-          if (!substr || sdpLines[i].toLowerCase().indexOf(substr.toLowerCase()) !== -1) {
-            return i;
-          }
-        }
-      }
-    } else {
-      var realStartLine = startLine !== -1 ? startLine : sdpLines.length - 1;
-      for (var j = realStartLine; j >= 0; --j) {
-        if (sdpLines[j].indexOf(prefix) === 0) {
-          if (!substr || sdpLines[j].toLowerCase().indexOf(substr.toLowerCase()) !== -1) {
-            return j;
-          }
-        }
-      }
-    }
-    return null;
-  };
 
-  function preferBitRate(sdp, bitrate, mediaType) {
-    var sdpLines = sdp.split("\r\n");
-    var mLineIndex = findLine(sdpLines, "m=", mediaType);
-    if (mLineIndex === null) {
-      trace("Failed to add bandwidth line to sdp, as no m-line found");
-      return sdp;
-    }
-    var nextMLineIndex = findLineInRange(sdpLines, mLineIndex + 1, -1, "m=");
-    if (nextMLineIndex === null) {
-      nextMLineIndex = sdpLines.length;
-    }
-    var cLineIndex = findLineInRange(sdpLines, mLineIndex + 1, nextMLineIndex, "c=");
-    if (cLineIndex === null) {
-      trace("Failed to add bandwidth line to sdp, as no c-line found");
-      return sdp;
-    }
-    var bLineIndex = findLineInRange(sdpLines, cLineIndex + 1, nextMLineIndex, "b=AS");
-    if (bLineIndex) {
-      sdpLines.splice(bLineIndex, 1);
-    }
-    var bwLine = "b=AS:" + bitrate;
-    sdpLines.splice(cLineIndex + 1, 0, bwLine);
-    sdp = sdpLines.join("\r\n");
-    return sdp;
-  };
 
   function getPeerConnection(id) {
     if (peerConnections[id]) {
@@ -419,7 +365,8 @@ angular.module('webrtcApp', ['ngSanitize']).run(function($rootScope, $timeout){/
   function makeOffer(id) {
     var pc = getPeerConnection(id);
     pc.createOffer().then(sdp => {
-      sdp.sdp = preferBitRate(sdp.sdp, '8000', 'video');
+      sdp.sdp = preferBitRate(sdp.sdp, '4000', 'video');
+      //sdp.sdp = maybePreferCodec(sdp.sdp, "video", "receive", 'H264');
       return pc.setLocalDescription(sdp);
     }).then(() => {
       console.log('Creating an offer for ', id);
@@ -440,7 +387,8 @@ angular.module('webrtcApp', ['ngSanitize']).run(function($rootScope, $timeout){/
         pc.setRemoteDescription(new RTCSessionDescription(data.sdp)).then(() => {
           return pc.createAnswer();
         }).then(answer => {
-          answer.sdp = preferBitRate(answer.sdp, '8000', 'video');
+          answer.sdp = preferBitRate(answer.sdp, '4000', 'video');
+          //answer.sdp = maybePreferCodec(answer.sdp, "video", "receive", 'H264');
           return pc.setLocalDescription(answer);
         }).then(() => {
           console.log('Sending answer to ', data.by);

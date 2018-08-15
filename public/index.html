@@ -12,6 +12,7 @@
     <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="/socket.io/socket.io.js"></script>
 
+    <script src="/scripts/sdputils.js"></script>
     <script src="/scripts/fullscr.js"></script>
     <script src="/scripts/adapter.js"></script>
     <script src="/scripts/app.js"></script>
@@ -58,7 +59,7 @@
     <div ng-show="fatalErr" class="fatalErr">
       <img class="logo" src="/img/govtech_logo.png"/>
       <div ng-bind="fatalErr"></div>
-      <a class="refresh" href="" onclick="location.reload()">Click here to refresh <img src="/img/refresh.png"/></a>
+      <a class="refresh" href="" onclick="location.reload()">Click <img src="/img/call.svg"/> to refresh.</a>
     </div>
   </body>
 </html>

@@ -13,15 +13,20 @@
   color:white;
 }
 .fatalErr .logo{
-    width:20%;
-    margin-bottom: 30px;
+  width:20%;
+  margin-bottom: 30px;
 }
 .fatalErr .refresh {
-    margin:20px 0;
-    color: white;
-    text-decoration: none;
+  margin:40px 0;
+  color: white;
+  text-decoration: none;
+  font-size:1.5em;
 }
 .fatalErr .refresh img{
-    vertical-align: middle;
-    height:18px;
+  vertical-align: middle;
+  height:3em;
+  border-radius:9999px;
+  background:green;
+  padding:0.6em;
+  animation: pulse linear 1.5s infinite;
 }
