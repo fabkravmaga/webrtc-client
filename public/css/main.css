@@ -143,7 +143,7 @@ body {
   justify-content:center;
   overflow:hidden;
 }
-.waitConnect #call {
+.waitConnect img {
   height:30vh;
   border-radius:9999px;
   background:green;
@@ -178,4 +178,5 @@ body {
   background:red;
   padding:0.5em;
   vertical-align:middle;
+  cursor:pointer;
 }

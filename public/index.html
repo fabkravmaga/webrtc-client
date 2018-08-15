@@ -34,11 +34,11 @@
 
     <div class="waitPeers" ng-if="loggedIn && inCall && peers.length < 1"><span class="aniEllipsis">Waiting for peers</span></div>
     <div class="waitConnect" ng-if="loggedIn && !inCall">
-      <img id="call" src="/img/call.svg">
+      <img src="/img/call.svg" onclick="eventTrigger('digitalportal.call')">
       <div>Ready to Connect?</div>
     </div>
     <div class="waitHangup" ng-if="loggedIn && inCall">
-      Press <img src="/img/hangup.svg"> to hangup
+      Press <img src="/img/hangup.svg" onclick="eventTrigger('digitalportal.hangup')"> to hangup
     </div>
 
     <div class="login" ng-class="{loginNeeded: loginNeeded}" ng-controller="LoginCtrl">
